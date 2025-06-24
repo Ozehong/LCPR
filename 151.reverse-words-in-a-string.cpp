@@ -31,31 +31,24 @@ public:
         while(left<right){
             swap(s[left++],s[right--]);
         }
-        // return s;
     }
 
     void removespace(string &s){
-        int left=0,right=0;
-        int low=0,cur=0;
+        int cur=0;int fast=0;
 
-        int i=0;
-        while(i<s.length()){
-            // cout<<s<<endl;
-            while(i<s.length() && s[i]==' '){
-                i++;
-            }
-            if(cur && i<s.length()) 
+        while(fast<s.length()){
+            while(fast<s.length() && s[fast]==' ')
+                fast++;
+            if(fast<s.length() && cur)
                 s[cur++] = ' ';
             int left=cur;
-            while(i<s.length() && s[i]!=' '){
-                s[cur++] = s[i++];
-            }
-            right=cur-1;
+            while(fast<s.length() && s[fast]!=' ')
+                s[cur++] = s[fast++];
+            int right =cur-1;
             reverse(left,right,s);
         }
-        
-        s.resize(cur);
-        
+
+        s.resize(cur); 
     }
 
     string reverseWords(string s) {

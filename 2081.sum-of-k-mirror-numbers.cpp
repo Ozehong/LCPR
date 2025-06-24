@@ -26,9 +26,11 @@ using namespace std;
 // @lcpr-template-end
 // @lc code=start
 class Solution {
+private:
+    char data[100];
 public:
-    bool checkhui(vector<int> &data){
-        int left=0,right=data.size()-1;
+    bool checkhui(int len){
+        int left=0,right=len-1;
         while(left<right){
             if(data[left++]!=data[right--])
                 return 0;
@@ -36,9 +38,38 @@ public:
         return 1;
     }
 
-    
+    bool huiwen(long long i,int k){
+        int len=0;
+        while(i){
+            data[len++] = i%k+'0';
+            i = i/k;
+        }
+        return checkhui(len);
+    }
+
     long long kMirror(int k, int n) {
-        
+        int l=0, num=0;
+        long long res=0;
+        for(l=1;;l++){
+            int left = pow(10,(l-1)/2);
+            int right = pow(10,(l+1)/2);
+            for(int i=left;i<right;++i){
+                long long v=i;
+                int j = l%2?i/10:i;
+                while(j){
+                    v = v*10 + j%10;
+                    j /= 10;
+                }
+                // cout<<v<<endl;
+                if(huiwen(v,k)){
+                    res += v;
+                    num++;
+                    // cout<<v<<endl;
+                }
+                if(num>=n) return res;
+            }
+        }
+
     }
 };
 // @lc code=end

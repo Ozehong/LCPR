@@ -29,14 +29,15 @@ class Solution {
 public:
     int partitionArray(vector<int>& nums, int k) {
         sort(nums.begin(),nums.end());
-        int res=0,left=0;
-        for(int i=0;i<nums.size();++i){
+        int left=0,res=0;
+        for(int i=1;i<nums.size();i++){
             if(nums[i]-nums[left]>k){
                 left=i;
                 res++;
             }
         }
-        return res+1;
+        res += 1;
+        return res;
     }
 };
 // @lc code=end

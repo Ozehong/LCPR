@@ -31,12 +31,12 @@ public:
         vector<vector<int>> ans;
         sort(nums.begin(),nums.end());
 
-        int key=0;
-        while(key<nums.size()){
-            if(nums[key+2]-nums[key]<=k)
-                ans.push_back({nums[key],nums[key+1],nums[key+2]});
-            else return {};
-            key+=3;
+        int cur=0;
+        while(cur<nums.size()/3){
+            if(nums[cur*3+2]-nums[cur*3]>k)
+                return {};
+            ans.push_back({nums[cur*3],nums[cur*3+1],nums[cur*3+2]});
+            cur++;
         }
         return ans;
     }

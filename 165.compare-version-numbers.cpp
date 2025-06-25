@@ -28,24 +28,25 @@ using namespace std;
 class Solution {
 public:
     int compareVersion(string version1, string version2) {
+        int len1 = version1.length(),len2=version2.length();
         int cur1=0,cur2=0;
-        while(cur1<version1.length() || cur2<version2.length()){
+        while(cur1<len1 || cur2<len2){
             int x=0;
-            while(cur1<version1.length() && version1[cur1]!='.'){
+            while(cur1<len1 && version1[cur1]!='.'){
                 x = x*10 + (version1[cur1++]-'0');
             }
             cur1++;
 
             int y=0;
-            while(cur2<version2.length() && version2[cur2]!='.'){
+            while(cur2<len2 && version2[cur2]!='.'){
                 y = y*10 + (version2[cur2++]-'0');
             }
             cur2++;
 
+            if(x>y) return 1;
             if(x<y) return -1;
-            else if(x>y) return 1;
+
         }
-        
         return 0;
     }
 };

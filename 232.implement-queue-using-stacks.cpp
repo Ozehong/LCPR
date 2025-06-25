@@ -38,22 +38,23 @@ public:
     
     int pop() {
         if(!data2.empty()){
-            int temp = data2.top();
-            data2.pop();
+            int temp = data2.top();data2.pop();
             return temp;
         }
-        int temp = data1.top();data1.pop();
-        while(!data1.empty()){
-            data2.push(temp);
-            temp=data1.top();data1.pop();
+        else{
+            int temp = data1.top();data1.pop();
+            while(!data1.empty()){
+                data2.push(temp);
+                temp = data1.top();data1.pop();
+            }
+            return temp;
         }
-        return temp; 
     }
     
     int peek() {
-        int temp=pop();
+        int temp = pop();
         data2.push(temp);
-        return temp; 
+        return temp;
     }
     
     bool empty() {

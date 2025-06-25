@@ -29,50 +29,22 @@ class Solution {
 private:
     vector<string> res;
 public:
-    // void dfs(int k,int lc,int rc,string &str){
-    //     if(rc==k){
-    //         res.push_back(str);
-    //         return;
-    //     }
- 
-    //     if(lc==rc && lc<k){
-    //         str.push_back('(');
-    //         dfs(k,lc+1,rc,str);
-    //         str.pop_back();
-    //     }
-    //     else if(lc>rc){
-    //         if(lc<k){
-    //             str.push_back('(');
-    //             dfs(k,lc+1,rc,str);
-    //             str.pop_back();
-    //         }
-            
-    //         str.push_back(')');
-    //         dfs(k,lc,rc+1,str);
-    //         str.pop_back();
-    //     }
-    // }
-
-    void dfs(int n,int lc,int rc,string temp){
-        if(rc==n && lc==n){
-            res.push_back(temp);
+    void dfs(int k,int lc,int rc,string &str){
+        if(lc==k && rc==k){
+            res.push_back(str);
             return;
         }
-    
-        if(lc>=rc){
-            if(lc==n){
-                temp.push_back(')');
-                dfs(n,lc,rc+1,temp);
-                temp.pop_back();
-            }
-            else{
-                temp.push_back('(');
-                dfs(n,lc+1,rc,temp);
-                temp.pop_back();
 
-                temp.push_back(')');
-                dfs(n,lc,rc+1,temp);
-                temp.pop_back();
+        if(lc>=rc){
+            if(lc!=k){
+                str.push_back('(');
+                dfs(k,lc+1,rc,str);
+                str.pop_back();
+            }
+            if(lc!=rc){
+                str.push_back(')');
+                dfs(k,lc,rc+1,str);
+                str.pop_back();
             }
         }
     }

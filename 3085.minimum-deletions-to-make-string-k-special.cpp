@@ -31,22 +31,19 @@ public:
 
         unordered_map<char,int> data;
         for(auto i:word){
-            data[i] ++;
-        } 
+            data[i]++;
+        }
 
         auto iter = data.begin();
-        int res = word.length();
-
+        int res=word.size()+1;
         while(iter!=data.end()){
-            int num=0;
             auto temp = data.begin();
+            int num=0;
             while(temp!=data.end()){
-                if(temp->second > iter->second + k){
-                    num+=temp->second - iter->second - k;
-                }
-                if(temp->second < iter->second){
+                if(temp->second<iter->second)
                     num += temp->second;
-                }
+                if(temp->second- iter->second > k)
+                    num += (temp->second- iter->second-k);
                 temp++;
             }
             res = min(res,num);
@@ -54,31 +51,6 @@ public:
         }
 
         return res;
-
-
-
-        // int res = 2e5;
-        // unordered_map<char,int> data;
-        // for(auto &c:word){
-        //     data[c]++;
-        // }
-        // auto it = data.begin();
-        // // cout<<it->second;
-        // while(it!=data.end()){
-        //     int temp_delete = 0;
-        //     auto temp = data.begin();
-        //     while(temp!=data.end()){
-        //         if(temp->second < it->second)
-        //             temp_delete += temp->second;
-        //         if(temp->second > k + it->second){
-        //             temp_delete += temp->second-k-it->second;
-        //         }
-        //         temp++;
-        //     }
-        //     res = min(res,temp_delete);
-        //     it++;
-        // }
-        // return res;
     }
 };
 // @lc code=end

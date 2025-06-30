@@ -29,22 +29,18 @@ class Solution {
 public:
     vector<string> divideString(string s, int k, char fill) {
         vector<string> res;
-        int num = s.length()%k?s.length()/k+1:s.length()/k;
+        int num = (s.length()%k)?s.length()/k+1:s.length()/k;
         for(int i=0;i<num;i++){
-            cout<<i;
-            if(i!=num-1){
-                res.push_back(s.substr(i*k,k));
-                
-            }     
+            string temp;
+            if(i!=num-1)
+                temp=s.substr(i*k,k);
             else{
-                string temp = s.substr(i*k);
-                if(i==s.length()/k)
-                    while(temp.length()!=k)
-                        temp+=fill;
-                res.push_back(temp);
-            }
-
-
+                temp = s.substr(i*k);
+                while(temp.length()<k)
+                    temp+=fill;
+                }
+            
+            res.push_back(temp);
         }
         return res;
     }

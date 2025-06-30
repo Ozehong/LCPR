@@ -28,25 +28,21 @@ using namespace std;
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        int left=0,right = nums.size()-1;
-        int mid = (left+right)/2;
+        int left=0,right=nums.size()-1,mid=0;
         while(left<=right){
             mid = (left+right)/2;
-            if(nums[mid] > target)
-                right = mid -1;
+            if(nums[mid]>target)
+                right = mid-1;
             else if(nums[mid]<target)
-                left = mid + 1;
+                left = mid+1;
             else break;
         }
+        if(left>right) return {-1,-1};
 
-        if(left>right)
-            return {-1,-1};
-        
-        left=mid;
+        left=mid-1;
         while(left>=0 && nums[left]==target)
             left--;
-        
-        right=mid;
+        right=mid+1;
         while(right<nums.size() && nums[right]==target)
             right++;
         

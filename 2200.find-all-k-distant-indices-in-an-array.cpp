@@ -31,9 +31,8 @@ public:
         vector<int> res;
         for(int i=0;i<nums.size();i++){
             if(nums[i]==key){
-                for(int j=((i-k)>=0?i-k:0);j<=(((i+k)<nums.size())?i+k:nums.size()-1);j++){
-                    // cout<<j<<endl;
-                    if(!res.size() || j>res[res.size()-1])
+                for(int j=max(i-k,0);j<=std::min(i+k,(int)nums.size()-1);j++){
+                    if(!res.size() || j>res.back())
                         res.push_back(j);
                 }
             }

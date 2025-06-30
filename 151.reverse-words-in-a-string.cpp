@@ -28,32 +28,29 @@ using namespace std;
 class Solution {
 public:
     void reverse(int left,int right,string &s){
-        while(left<right){
+        while(left<right)
             swap(s[left++],s[right--]);
-        }
     }
+    void remodespace(string &s){
+        int cur=0,len = s.length();
+        int temp=0;
 
-    void removespace(string &s){
-        int cur=0;int fast=0;
-
-        while(fast<s.length()){
-            while(fast<s.length() && s[fast]==' ')
-                fast++;
-            if(fast<s.length() && cur)
+        while(temp<len){
+            while(temp<len && s[temp]==' ')
+                temp++;
+            if(temp<len && cur!=0)
                 s[cur++] = ' ';
             int left=cur;
-            while(fast<s.length() && s[fast]!=' ')
-                s[cur++] = s[fast++];
-            int right =cur-1;
-            reverse(left,right,s);
+            while(temp<len && s[temp]!=' ')
+                s[cur++] = s[temp++];
+            int right = cur;
+            reverse(left,right-1,s);
         }
-
-        s.resize(cur); 
+        s.resize(cur);
     }
-
     string reverseWords(string s) {
-        removespace(s);
         reverse(0,s.length()-1,s);
+        remodespace(s);
         return s;
     }
 };

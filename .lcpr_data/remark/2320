@@ -1,0 +1,1 @@
+{"data":[{"name":"2025-06-29 13:01:20","id":1751173280482,"body":"1. std::min函数的两个参数类型不匹配。i + k是int类型，而nums.size()是size_type类型（通常是unsigned long）\r\n2. res.back() vector获取最后一个  也可以用 res.end()-1"}]}

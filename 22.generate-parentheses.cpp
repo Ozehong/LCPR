@@ -29,23 +29,20 @@ class Solution {
 private:
     vector<string> res;
 public:
-    void dfs(int k,int lc,int rc,string &str){
-        if(lc==k && rc==k){
+    void dfs(int n,int lc,int rc,string &str){
+        if(lc==n && rc==n){
             res.push_back(str);
             return;
         }
-
         if(lc>=rc){
-            if(lc!=k){
+            if(lc!=n){
                 str.push_back('(');
-                dfs(k,lc+1,rc,str);
+                dfs(n,lc+1,rc,str);
                 str.pop_back();
             }
-            if(lc!=rc){
-                str.push_back(')');
-                dfs(k,lc,rc+1,str);
-                str.pop_back();
-            }
+            str.push_back(')');
+            dfs(n,lc,rc+1,str);
+            str.pop_back();
         }
     }
 

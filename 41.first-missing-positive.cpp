@@ -29,23 +29,36 @@ class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
         int len = nums.size();
-        for(int i=0;i<len;i++){
+        for(int i=0;i<len;i++)
             if(nums[i]<=0)
                 nums[i] = len+1;
-        }
+        
+        for(int i=0;i<len;i++)
+            if(abs(nums[i])<=len)
+                nums[abs(nums[i])-1] = -abs(nums[abs(nums[i])-1]);
 
-        for(int i=0;i<len;i++){
-            int temp = abs(nums[i]);
-            if(temp<=len)
-                nums[temp-1] = -abs(nums[temp-1]);
-        }
-
-        for(int i=0;i<len;i++){
+        for(int i=0;i<len;i++)
             if(nums[i]>0)
                 return i+1;
-        }
-            
         return len+1;
+
+        // for(int i=0;i<len;i++){
+        //     if(nums[i]<=0)
+        //         nums[i] = len+1;
+        // }
+
+        // for(int i=0;i<len;i++){
+        //     int temp = abs(nums[i]);
+        //     if(temp<=len)
+        //         nums[temp-1] = -abs(nums[temp-1]);
+        // }
+
+        // for(int i=0;i<len;i++){
+        //     if(nums[i]>0)
+        //         return i+1;
+        // }
+            
+        // return len+1;
     }
 };
 // @lc code=end

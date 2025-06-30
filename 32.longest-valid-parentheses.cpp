@@ -28,24 +28,40 @@ using namespace std;
 class Solution {
 public:
     int longestValidParentheses(string s) {
+        int left=0,right=0;
         int res=0;
-        stack<int> stk;
-        stk.push(-1);
-
         for(int i=0;i<s.length();i++){
-            if(s[i]=='(')
-                stk.push(i);
-            else{
-                stk.pop();
-                if(stk.empty())
-                    stk.push(i);
-                else
-                    res = max(res,i-stk.top());
+            if(s[i]=='('){
+                left++;
+            }
+            if(s[i]==')'){
+                right++;
+            }
+            if(left==right){
+                res = max(res,right);
+            }
+            if(left<right){
+                left=0;right=0;
             }
         }
-        return res;
+        left=0,right=0;
+        for(int i=s.length()-1;i>=0;i--){
+            if(s[i]=='('){
+                left++;
+            }
+            if(s[i]==')'){
+                right++;
+            }
+            if(left==right){
+                res = max(res,left);
+            }
+            if(left>right){
+                left=0;right=0;
+            }
+        }
+        return res*2;
 
-
+        // 法1:
         // int len = s.length();
         // int res=0;
         // vector<int> dp(len+1,0);
@@ -66,24 +82,20 @@ public:
 
 
         // // case 2: 保持栈底元素为当前已经遍历过的元素中「最后一个没有被匹配的右括号的下标」
-        // int res=0,temp=0;
-        // int before = 0;
+        // int res=0;
+        // stack<int> stk;
+        // stk.push(-1);
 
-        // stack<int> data;
-        // data.push(-1);
         // for(int i=0;i<s.length();i++){
-        //     if(s[i]=='('){
-        //         data.push(i);
-        //     }
+        //     if(s[i]=='(')
+        //         stk.push(i);
         //     else{
-        //         data.pop();
-        //         if(data.empty()){
-        //             data.push(i);
-        //         }
-        //         else{
-        //             res = max(res,i-data.top());
-        //         }
-        //     }      
+        //         stk.pop();
+        //         if(stk.empty())
+        //             stk.push(i);
+        //         else
+        //             res = max(res,i-stk.top());
+        //     }
         // }
         // return res;
 

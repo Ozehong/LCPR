@@ -28,31 +28,24 @@ using namespace std;
 class Solution {
 public:
     int longestSubsequence(string s, int k) {
-        int res=0;
-        int m=0,temp_k=k;
-        while(temp_k){
-            temp_k /=2;
-            m++;
+        int temp=k,num_k=0;
+        while(temp){
+            temp /= 2;
+            num_k++;
         }
 
-        int len = s.length();
-        if(m>len)
+        int num=0;
+        long long len = s.length();
+        if(len<num_k)
             return len;
-
-        int temp=0;
-        for(int i=len-m;i<len;i++){
-            temp = temp * 2 + (s[i]-'0');
+        for(int i=len-num_k;i<s.length();i++){
+            num = num*2 + s[i]-'0';
         }
-        if(temp<=k)
-            res=m;
-        else res = m-1;
-
-        for(int i=0;i<len-m;i++)
+        int res= num<=k? num_k:num_k-1;
+        for(int i=0;i<len-num_k;i++)
             if(s[i]=='0')
-                res +=1;
-        
+                res++;
         return res;
-
 
     }
 };

@@ -27,23 +27,19 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
-
     static bool cmp(const pair<int,int> &a,const pair<int,int> &b){
-        return a.second > b.second;
+        return a.second>b.second;
     }
-        
+
     vector<int> maxSubsequence(vector<int>& nums, int k) {
-        // if(k>=nums.size())
-        //     return nums;
-        vector<pair<int,int>> vals;
         vector<int> res;
+        vector<pair<int,int>> data;
         for(int i=0;i<nums.size();i++)
-            vals.push_back({i,nums[i]});
-        sort(vals.begin(),vals.end(),cmp);
-        sort(vals.begin(),vals.begin()+k);
-        for(int i=0;i<k;i++){
-            res.push_back(vals[i].second);
-        }
+            data.push_back({i,nums[i]});
+        sort(data.begin(),data.end(),cmp);
+        sort(data.begin(),data.begin()+k);
+        for(int i=0;i<k;i++)
+            res.push_back(data[i].second);
         return res;
     }
 };

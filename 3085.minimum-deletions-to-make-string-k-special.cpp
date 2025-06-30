@@ -30,26 +30,23 @@ public:
     int minimumDeletions(string word, int k) {
 
         unordered_map<char,int> data;
-        for(auto i:word){
-            data[i]++;
-        }
-
-        auto iter = data.begin();
-        int res=word.size()+1;
+        for(auto i:word)
+            data[i] ++;
+        int res=word.length();
+        auto iter=data.begin();
         while(iter!=data.end()){
-            auto temp = data.begin();
-            int num=0;
-            while(temp!=data.end()){
-                if(temp->second<iter->second)
-                    num += temp->second;
-                if(temp->second- iter->second > k)
-                    num += (temp->second- iter->second-k);
-                temp++;
+            int temp=0;
+            auto it = data.begin();
+            while(it!=data.end()){
+                if(it->second-k>iter->second)
+                    temp += it->second - iter->second - k;
+                if(it->second < iter->second)
+                    temp += it->second;
+                it++;
             }
-            res = min(res,num);
             iter++;
+            res = min(res,temp);
         }
-
         return res;
     }
 };
